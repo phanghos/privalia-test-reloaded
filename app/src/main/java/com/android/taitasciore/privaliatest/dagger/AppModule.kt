@@ -32,7 +32,7 @@ class AppModule {
     @Singleton
     fun provideOkHttpClient(context: Context): OkHttpClient {
         val httpLoggingInterceptor = HttpLoggingInterceptor()
-        httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
+        httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BASIC
         return OkHttpClient.Builder()
                 .addInterceptor(httpLoggingInterceptor)
                 .addInterceptor(AuthInterceptor())
