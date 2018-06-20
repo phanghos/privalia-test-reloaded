@@ -14,6 +14,7 @@ def rxAndroidVersion = '2.0.2'
 def rxBindingVersion = '2.1.1'
 def retrofitVersion = '2.4.0'
 def okHttpVersion = '3.10.0'
+def frescoVersion = '1.9.0'
 def materialishProgress = '1.7'
 
 // Testing
@@ -92,6 +93,8 @@ dependencies {
 
     // OkHttp
     implementation "com.squareup.okhttp3:logging-interceptor:$okHttpVersion"
+
+    implementation "com.facebook.fresco:fresco:$frescoVersion"
 
     // Materialish progress
     implementation "com.pnikosis:materialish-progress:$materialishProgress"
