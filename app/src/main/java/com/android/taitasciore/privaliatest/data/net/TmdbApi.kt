@@ -8,7 +8,7 @@ import retrofit2.http.Query
 interface TmdbApi {
 
     companion object {
-        val BASE_URL = "https://api.themoviedb.org/3/"
+        const val BASE_URL = "https://api.themoviedb.org/3/"
     }
 
     @GET("movie/popular")
