@@ -6,6 +6,8 @@ import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.content.ContextCompat
+import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.SearchView
 import android.view.*
@@ -19,10 +21,7 @@ import com.android.taitasciore.privaliatest.feature.popularmovies.view.adapter.M
 import com.android.taitasciore.privaliatest.feature.popularmovies.viewmodel.PopularMoviesViewModel
 import com.android.taitasciore.privaliatest.feature.popularmovies.viewmodel.PopularMoviesViewModelFactory
 import com.android.taitasciore.privaliatest.presentation.base.BaseView
-import com.android.taitasciore.privaliatest.utils.getBaseApplication
-import com.android.taitasciore.privaliatest.utils.hideView
-import com.android.taitasciore.privaliatest.utils.showSnackbar
-import com.android.taitasciore.privaliatest.utils.showView
+import com.android.taitasciore.privaliatest.utils.*
 import com.jakewharton.rxbinding2.support.v7.widget.RxRecyclerView
 import com.jakewharton.rxbinding2.support.v7.widget.RxSearchView
 import com.jakewharton.rxbinding2.view.RxView
@@ -52,7 +51,7 @@ class PopularMoviesFragment : Fragment(), BaseView<PopularMoviesUiEvent, Popular
         super.onViewCreated(view, savedInstanceState)
         getBaseApplication().component.inject(this)
         setHasOptionsMenu(true)
-        list.adapter = movieAdapter
+        setupRecyclerView()
 
         viewModel.states().observe(this, Observer { render(it!!) })
         viewModel.processUiEvents(events())
@@ -81,6 +80,11 @@ class PopularMoviesFragment : Fragment(), BaseView<PopularMoviesUiEvent, Popular
                     if (it.isEmpty()) viewModel.sendEvent(PopularMoviesUiEvent.LoadFirst())
                     else viewModel.sendEvent(PopularMoviesUiEvent.Search(it.toString()))
                 }
+    }
+
+    private fun setupRecyclerView() {
+        list.addDivider(context!!, R.drawable.divider)
+        list.adapter = movieAdapter
     }
 
     private fun initialEvent() = Observable.just(PopularMoviesUiEvent.Initial())

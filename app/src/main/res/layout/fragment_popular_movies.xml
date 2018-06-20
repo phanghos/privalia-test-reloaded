@@ -35,7 +35,6 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:textSize="18sp"
-            android:textStyle="bold"
             android:text="@string/error_message" />
 
         <Button
