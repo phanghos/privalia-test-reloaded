@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Privalia Test</string>
+    <string name="search_hint">Search movies by keyword</string>
+
+    <!-- Errors -->
+    <string name="error_message">Something went wrong. Please try again</string>
+    <string name="error_button_retry">retry</string>
+    <string name="error_message_not_found">Your query did not match any movies!</string>
+</resources>

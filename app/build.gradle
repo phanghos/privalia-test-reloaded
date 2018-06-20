@@ -1,0 +1,98 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+apply plugin: 'kotlin-kapt'
+
+def supportVersion = '27.1.1'
+def archComponentsVersion = '1.1.1'
+def daggerVersion = '2.16'
+def rxKotlinVersion = '2.2.0'
+def rxAndroidVersion = '2.0.2'
+def rxBindingVersion = '2.1.1'
+def retrofitVersion = '2.4.0'
+def okHttpVersion = '3.10.0'
+def materialishProgress = '1.7'
+
+// Testing
+def mockitoVersion = '1.10.19'
+
+android {
+    compileSdkVersion 27
+    defaultConfig {
+        applicationId "com.android.taitasciore.privaliatest"
+        minSdkVersion 15
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+        buildConfigField "String", "API_KEY", "\"93aea0c77bc168d8bbce3918cefefa45\""
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "com.android.support:design:$supportVersion"
+    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
+    testImplementation 'junit:junit:4.12'
+    testImplementation "org.mockito:mockito-core:$mockitoVersion"
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
+    // Architecture Components
+    implementation "android.arch.lifecycle:extensions:$archComponentsVersion"
+    kapt "android.arch.lifecycle:compiler:$archComponentsVersion"
+    kapt "android.arch.lifecycle:compiler:$archComponentsVersion"
+    // Test helpers for LiveData
+    testImplementation "android.arch.core:core-testing:$archComponentsVersion"
+
+    // Dagger
+    implementation "com.google.dagger:dagger:$daggerVersion"
+    implementation ("com.google.dagger:dagger-android:$daggerVersion") {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+    kapt "com.google.dagger:dagger-android-processor:$daggerVersion"
+    kapt "com.google.dagger:dagger-compiler:$daggerVersion"
+
+    // RxKotlin
+    implementation "io.reactivex.rxjava2:rxkotlin:$rxKotlinVersion"
+    // RxAndroid
+    implementation "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion"
+    // RxBinding
+    implementation ("com.jakewharton.rxbinding2:rxbinding:$rxBindingVersion") {
+        exclude group: 'io.reactivex.rxjava2', module: 'rxjava'
+        exclude group: 'io.reactivex.rxjava2', module: 'rxandroid'
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+    /*
+    implementation 'com.jakewharton.rxbinding2:rxbinding-support-v4:2.1.1'
+    implementation "com.jakewharton.rxbinding2:rxbinding-appcompat-v7:$rxBindingVersion"
+    implementation 'com.jakewharton.rxbinding2:rxbinding-design:2.1.1'
+    */
+    implementation "com.jakewharton.rxbinding2:rxbinding-recyclerview-v7:$rxBindingVersion"
+    implementation "com.jakewharton.rxbinding2:rxbinding-appcompat-v7:$rxBindingVersion"
+
+    // Retrofit
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation ("com.squareup.retrofit2:converter-gson:$retrofitVersion") {
+        exclude group: 'com.squareup.retrofit2', module: 'retrofit'
+    }
+    implementation("com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion") {
+        exclude group: 'io.reactivex.rxjava2', module: 'rxjava'
+    }
+
+    // OkHttp
+    implementation "com.squareup.okhttp3:logging-interceptor:$okHttpVersion"
+
+    // Materialish progress
+    implementation "com.pnikosis:materialish-progress:$materialishProgress"
+}
