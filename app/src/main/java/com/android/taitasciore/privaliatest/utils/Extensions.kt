@@ -1,7 +1,11 @@
 package com.android.taitasciore.privaliatest.utils
 
+import android.content.Context
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
+import android.support.v4.content.ContextCompat
+import android.support.v7.widget.DividerItemDecoration
+import android.support.v7.widget.RecyclerView
 import android.view.View
 import com.android.taitasciore.privaliatest.BaseApplication
 import java.text.SimpleDateFormat
@@ -34,3 +38,14 @@ fun String.parseSimpleDate(): Calendar {
     return calendar
 }
 
+/**
+ * RecyclerView extensions
+ */
+fun RecyclerView.addDivider(context: Context?, resId: Int) {
+    val divider = ContextCompat.getDrawable(context!!, resId)
+    val itemDecoration = DividerItemDecoration(context!!, DividerItemDecoration.VERTICAL)
+    divider?.let {
+        itemDecoration.setDrawable(divider)
+        this.addItemDecoration(itemDecoration)
+    }
+}
